@@ -4,10 +4,10 @@ import by.bsu.fpmi.bip.plugin.api.Plugin;
 import by.bsu.fpmi.bip.plugin.api.PluginDescriptor;
 
 public final class OlapReportMasterDescriptor implements PluginDescriptor {
-    private final OlapReportMaster olapReportMaster;
+    private final OlapReportMasterPlugin olapReportMasterPlugin;
 
     public OlapReportMasterDescriptor() {
-        olapReportMaster = new OlapReportMaster();
+        olapReportMasterPlugin = new OlapReportMasterPlugin();
     }
 
     @Override
@@ -17,6 +17,6 @@ public final class OlapReportMasterDescriptor implements PluginDescriptor {
 
     @Override
     public Plugin getPlugin() {
-        return olapReportMaster;
+        return olapReportMasterPlugin;
     }
 }

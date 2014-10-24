@@ -1,0 +1,8 @@
+<multidimensional-scheme schemeName="Apple Shops">
+    <facts tableName="FACTS">
+        <value-column columnName="SALES_COUNT"/>
+    </facts>
+    <dimension dimensionName="Shops" tableName="SHOPS" pk="ID" fk="SHOP_ID"/>
+    <dimension dimensionName="Apple Sorts" tableName="APPLE_SORTS" pk="ID" fk="APPLE_SORT_ID"/>
+    <dimension dimensionName="Dates" tableName="DATES" pk="ID" fk="DATE_ID"/>
+</multidimensional-scheme>
