@@ -1,5 +1,6 @@
 package by.bsu.fpmi.bip.core;
 
+import by.bsu.fpmi.bip.plugin.api.Plugin;
 import by.bsu.fpmi.bip.plugin.api.PluginDescriptor;
 
 import java.util.Collection;
@@ -17,7 +18,12 @@ public class Main {
         }
         for (PluginDescriptor pluginDescriptor : applicationContext.getPluginManager().getPluginDescriptors()) {
             System.out.println("Invoke plugin " + pluginDescriptor.getName());
-            pluginDescriptor.getPlugin().invoke();
+            Plugin plugin = pluginDescriptor.getPlugin(null);
+            if (plugin == null) {
+                System.out.println("Plugin " + pluginDescriptor.getDescription() + " is null.");
+            } else {
+                plugin.invoke();
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package by.bsu.fpmi.bip.plugin.oms;
+package by.bsu.fpmi.bip.plugin.omsormsaa;
 
 import by.bsu.fpmi.bip.plugin.api.ApiDescriptor;
 import by.bsu.fpmi.bip.plugin.api.ApiDescriptors;
@@ -9,29 +9,31 @@ import by.bsu.fpmi.bip.plugin.api.PluginDescriptor;
 import java.util.Collections;
 import java.util.Set;
 
-public final class OlapMultidimensionalStoragePluginDescriptor implements PluginDescriptor {
+public final class OmsOrmsApiAdapterPluginDescriptor implements PluginDescriptor {
     private final Set<ApiDescriptor> providedApiDescriptors;
-    private final OlapMultidimensionalStoragePlugin plugin = new OlapMultidimensionalStoragePlugin();
+    private final Set<ApiDescriptor> requiredApiDescriptors;
 
-    public OlapMultidimensionalStoragePluginDescriptor() {
+    public OmsOrmsApiAdapterPluginDescriptor() {
         this.providedApiDescriptors = Collections.singleton(ApiDescriptors
-                .getProvidedApiDescriptor("by.bsu.fpmi.bip.plugin.oms.api.spi.OmsApiProvider", "0.1",
-                        new OmsApiProviderImpl()));
+                .getProvidedApiDescriptor("by.bsu.fpmi.bip.plugin.orp.storage.api.spi.OrpStorageApiProvider", "0.1",
+                        null));
+        this.requiredApiDescriptors = Collections.singleton(
+                ApiDescriptors.getRequiredApiDescriptor("by.bsu.fpmi.bip.plugin.oms.api.spi.OmsApiProvider", "0.1"));
     }
 
     @Override
     public String getName() {
-        return "by.bsu.fpmi.bip.plugin.oms.OlapMultidimensionalStoragePlugin";
+        return "by.bsu.fpmi.bip.plugin.omsormsaa.OmsOrmsApiAdapterPluginDescriptor";
     }
 
     @Override
     public String getDescription() {
-        return "OLAP Multidimensional Storage";
+        return "OMS (OLAP multidimensional storage) - ORMS (OLAP report master storage) API adapter";
     }
 
     @Override
     public Set<ApiDescriptor> getRequiredApiDescriptors() {
-        return Collections.emptySet();
+        return requiredApiDescriptors;
     }
 
     @Override
@@ -41,6 +43,6 @@ public final class OlapMultidimensionalStoragePluginDescriptor implements Plugin
 
     @Override
     public Plugin getPlugin(PluginContext pluginContext) {
-        return plugin;
+        return null;
     }
 }
