@@ -2,7 +2,7 @@ package by.bsu.fpmi.bip.core.application;
 
 import by.bsu.fpmi.bip.plugin.api.PluginDescriptor;
 import by.bsu.fpmi.bip.plugin.manager.PluginManager;
-import by.bsu.fpmi.bip.plugin.manager.PluginManagerFactory;
+import by.bsu.fpmi.bip.plugin.manager.PluginManagers;
 
 import java.util.Collection;
 
@@ -22,7 +22,7 @@ public final class ApplicationContext {
     }
 
     public static void initialize(String[] args, Collection<PluginDescriptor> pluginDescriptors) {
-        PluginManager pluginManager = PluginManagerFactory.createPluginManager(pluginDescriptors);
+        PluginManager pluginManager = PluginManagers.newPluginManager(pluginDescriptors);
         сontext = new ApplicationContext(args, pluginManager);
     }
 
@@ -32,5 +32,9 @@ public final class ApplicationContext {
 
     public PluginManager getPluginManager() {
         return pluginManager;
+    }
+
+    public Collection<PluginDescriptor> getResolvedPluginDescriptors() {
+        return pluginManager.getPluginDescriptors();
     }
 }

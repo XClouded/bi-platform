@@ -5,12 +5,12 @@ import by.bsu.fpmi.bip.plugin.api.PluginDescriptor;
 
 import java.util.Collection;
 
-public final class PluginManagerFactory {
-    private PluginManagerFactory() {
+public final class PluginManagers {
+    private PluginManagers() {
         Errors.throwInstantiationError();
     }
 
-    public static PluginManager createPluginManager(Collection<PluginDescriptor> pluginDescriptors) {
+    public static PluginManager newPluginManager(Collection<PluginDescriptor> pluginDescriptors) {
         return new PluginManagerImpl(pluginDescriptors);
     }
 }
