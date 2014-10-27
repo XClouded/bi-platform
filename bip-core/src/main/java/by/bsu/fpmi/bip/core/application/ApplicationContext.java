@@ -1,4 +1,4 @@
-package by.bsu.fpmi.bip.core;
+package by.bsu.fpmi.bip.core.application;
 
 import by.bsu.fpmi.bip.plugin.api.PluginDescriptor;
 import by.bsu.fpmi.bip.plugin.manager.PluginManager;
@@ -7,7 +7,7 @@ import by.bsu.fpmi.bip.plugin.manager.PluginManagerFactory;
 import java.util.Collection;
 
 public final class ApplicationContext {
-    private static ApplicationContext currentApplicationContext;
+    private static ApplicationContext сontext;
 
     private final String[] args;
     private final PluginManager pluginManager;
@@ -17,15 +17,13 @@ public final class ApplicationContext {
         this.pluginManager = pluginManager;
     }
 
-    public static ApplicationContext getCurrentInstance() {
-        return currentApplicationContext;
+    public static ApplicationContext getInstance() {
+        return сontext;
     }
 
-    public static ApplicationContext createApplicationContext(String[] args,
-                                                              Collection<PluginDescriptor> pluginDescriptors) {
+    public static void initialize(String[] args, Collection<PluginDescriptor> pluginDescriptors) {
         PluginManager pluginManager = PluginManagerFactory.createPluginManager(pluginDescriptors);
-        currentApplicationContext = new ApplicationContext(args, pluginManager);
-        return currentApplicationContext;
+        сontext = new ApplicationContext(args, pluginManager);
     }
 
     public String[] getArgs() {

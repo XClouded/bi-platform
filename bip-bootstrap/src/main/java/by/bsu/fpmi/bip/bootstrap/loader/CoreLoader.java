@@ -18,7 +18,7 @@ public final class CoreLoader {
     private static final Logger LOGGER = Logger.getLogger(CoreLoader.class.getName());
 
     private static final String BIP_CORE_FILE_PATH = System.getProperty("user.dir") + "/core/bip-core.jar";
-    private static final String MAIN_METHOD_NAME = "main";
+    private static final String INITIALIZE_METHOD_NAME = "initialize";
 
     public static void launch(String[] args, Collection<PluginDescriptor> pluginDescriptors) {
         try {
@@ -27,7 +27,8 @@ public final class CoreLoader {
             JarFile coreJarFile = new JarFile(coreFile);
             String mainClassName = coreJarFile.getManifest().getMainAttributes().getValue(Attributes.Name.MAIN_CLASS);
             Class<?> mainClass = coreClassLoader.loadClass(mainClassName);
-            Method mainMethod = mainClass.getMethod(MAIN_METHOD_NAME, String[].class, Collection.class);
+            Method mainMethod = mainClass.getMethod(INITIALIZE_METHOD_NAME, String[].class, Collection.class);
+            mainMethod.setAccessible(true);
             mainMethod.invoke(null, args, pluginDescriptors);
         } catch (ClassNotFoundException | IOException | NoSuchMethodException | InvocationTargetException |
                 IllegalAccessException e) {
